@@ -1,0 +1,28 @@
+{
+  "name": "v8-print-code-parser",
+  "version": "0.0.0",
+  "description": "Parse v8 --print-code and --print-opt-code output",
+  "author": "Eugene Sharygin <eush77@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "homepage": "https://github.com/eush77/v8-print-code-parser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eush77/v8-print-code-parser"
+  },
+  "bugs": {
+    "url": "https://github.com/eush77/v8-print-code-parser/issues"
+  },
+  "keywords": [
+    "v8",
+    "dump",
+    "asm",
+    "optimization",
+    "code",
+    "parser"
+  ],
+  "dependencies": {},
+  "devDependencies": {}
+}
