@@ -1,0 +1,116 @@
+--- Raw source ---
+(a, b) {
+  return a - b;
+};
+
+--- Optimized code ---
+optimization_id = 0
+source_position = 144
+kind = OPTIMIZED_FUNCTION
+name = sub
+stack_slots = 1
+Instructions (size = 111)
+0x1649c54c3e80     0  55             push rbp
+0x1649c54c3e81     1  4889e5         REX.W movq rbp,rsp
+0x1649c54c3e84     4  56             push rsi
+0x1649c54c3e85     5  57             push rdi
+0x1649c54c3e86     6  4883ec08       REX.W subq rsp,0x8
+0x1649c54c3e8a    10  488b45f8       REX.W movq rax,[rbp-0x8]
+0x1649c54c3e8e    14  488945e8       REX.W movq [rbp-0x18],rax
+0x1649c54c3e92    18  488bf0         REX.W movq rsi,rax
+0x1649c54c3e95    21  493ba5f0070000 REX.W cmpq rsp,[r13+0x7f0]
+0x1649c54c3e9c    28  7305           jnc 35  (0x1649c54c3ea3)
+0x1649c54c3e9e    30  e8dd20f6ff     call StackCheck  (0x1649c5425f80)    ;; code: BUILTIN
+0x1649c54c3ea3    35  488b4518       REX.W movq rax,[rbp+0x18]
+0x1649c54c3ea7    39  a801           test al,0x1             ;; debug: position 164
+0x1649c54c3ea9    41  0f851d000000   jnz 76  (0x1649c54c3ecc)
+0x1649c54c3eaf    47  488b5d10       REX.W movq rbx,[rbp+0x10]
+0x1649c54c3eb3    51  f6c301         testb rbx,0x1
+0x1649c54c3eb6    54  0f8515000000   jnz 81  (0x1649c54c3ed1)
+0x1649c54c3ebc    60  482bc3         REX.W subq rax,rbx
+0x1649c54c3ebf    63  0f8011000000   jo 86  (0x1649c54c3ed6)
+0x1649c54c3ec5    69  488be5         REX.W movq rsp,rbp
+0x1649c54c3ec8    72  5d             pop rbp
+0x1649c54c3ec9    73  c21800         ret 0x18
+0x1649c54c3ecc    76  e83921c4ff     call 0x1649c510600a     ;; deoptimization bailout 1
+0x1649c54c3ed1    81  e83e21c4ff     call 0x1649c5106014     ;; deoptimization bailout 2
+0x1649c54c3ed6    86  e84321c4ff     call 0x1649c510601e     ;; deoptimization bailout 3
+0x1649c54c3edb    91  90             nop
+
+Deoptimization Input Data (deopt points = 4)
+ index  ast id    argc     pc
+     0       3       0     35
+     1       3       0     -1
+     2       3       0     -1
+     3       3       0     -1
+
+Safepoints (size = 19)
+0x1649c54c3ea3    35  1 (sp -> fp)       0
+
+RelocInfo (size = 14)
+0x1649c54c3e9f  code target (BUILTIN)  (0x1649c5425f80)
+0x1649c54c3ea7  position  (164)
+0x1649c54c3ecd  runtime entry  (deoptimization bailout 1)
+0x1649c54c3ed2  runtime entry  (deoptimization bailout 2)
+0x1649c54c3ed7  runtime entry  (deoptimization bailout 3)
+
+--- End code ---
+--- Raw source ---
+(a, b) {
+  return a + b;
+};
+
+--- Optimized code ---
+optimization_id = 1
+source_position = 96
+kind = OPTIMIZED_FUNCTION
+name = add
+stack_slots = 1
+Instructions (size = 115)
+0x1649c54c3f60     0  55             push rbp
+0x1649c54c3f61     1  4889e5         REX.W movq rbp,rsp
+0x1649c54c3f64     4  56             push rsi
+0x1649c54c3f65     5  57             push rdi
+0x1649c54c3f66     6  4883ec08       REX.W subq rsp,0x8
+0x1649c54c3f6a    10  488b45f8       REX.W movq rax,[rbp-0x8]
+0x1649c54c3f6e    14  488945e8       REX.W movq [rbp-0x18],rax
+0x1649c54c3f72    18  488bf0         REX.W movq rsi,rax
+0x1649c54c3f75    21  493ba5f0070000 REX.W cmpq rsp,[r13+0x7f0]
+0x1649c54c3f7c    28  7305           jnc 35  (0x1649c54c3f83)
+0x1649c54c3f7e    30  e8fd1ff6ff     call StackCheck  (0x1649c5425f80)    ;; code: BUILTIN
+0x1649c54c3f83    35  488b4518       REX.W movq rax,[rbp+0x18]
+0x1649c54c3f87    39  a801           test al,0x1             ;; debug: position 116
+0x1649c54c3f89    41  0f8520000000   jnz 79  (0x1649c54c3faf)
+0x1649c54c3f8f    47  488b5d10       REX.W movq rbx,[rbp+0x10]
+0x1649c54c3f93    51  f6c301         testb rbx,0x1
+0x1649c54c3f96    54  0f8518000000   jnz 84  (0x1649c54c3fb4)
+0x1649c54c3f9c    60  4803d8         REX.W addq rbx,rax
+0x1649c54c3f9f    63  0f8014000000   jo 89  (0x1649c54c3fb9)
+0x1649c54c3fa5    69  488bc3         REX.W movq rax,rbx
+0x1649c54c3fa8    72  488be5         REX.W movq rsp,rbp
+0x1649c54c3fab    75  5d             pop rbp
+0x1649c54c3fac    76  c21800         ret 0x18
+0x1649c54c3faf    79  e85620c4ff     call 0x1649c510600a     ;; deoptimization bailout 1
+0x1649c54c3fb4    84  e85b20c4ff     call 0x1649c5106014     ;; deoptimization bailout 2
+0x1649c54c3fb9    89  e86020c4ff     call 0x1649c510601e     ;; deoptimization bailout 3
+0x1649c54c3fbe    94  6690           nop
+5051
+
+Deoptimization Input Data (deopt points = 4)
+ index  ast id    argc     pc
+     0       3       0     35
+     1       3       0     -1
+     2       3       0     -1
+     3       3       0     -1
+
+Safepoints (size = 19)
+0x1649c54c3f83    35  1 (sp -> fp)       0
+
+RelocInfo (size = 14)
+0x1649c54c3f7f  code target (BUILTIN)  (0x1649c5425f80)
+0x1649c54c3f87  position  (116)
+0x1649c54c3fb0  runtime entry  (deoptimization bailout 1)
+0x1649c54c3fb5  runtime entry  (deoptimization bailout 2)
+0x1649c54c3fba  runtime entry  (deoptimization bailout 3)
+
+--- End code ---

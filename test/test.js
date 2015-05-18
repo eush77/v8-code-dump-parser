@@ -2,32 +2,53 @@
 
 var parse = require('..');
 
-var test = require('tape'),
-    parseConcat = require('parse-concat-stream');
+var tape = require('tape');
 
-var spawn = require('child_process').spawn;
+var fs = require('fs'),
+    path = require('path');
 
 
-var onDump = function (v8option, cb) {
-  var node = spawn('node', [v8option, 'prefix-sum.js'], {
-    cwd: __dirname,
-    stdio: ['ignore', 'pipe', 'ignore']
-  });
-  node.stdout.pipe(parseConcat({ parse: parse }, cb));
+var testDump = function (name, test) {
+  var dump = fs.readFileSync(path.join(__dirname, 'data', name),
+                             { encoding: 'utf8' });
+  var sections = parse(dump);
+  tape(name, test.bind(null, sections));
 };
 
 
-test('print_code', function (t) {
-  onDump('--print-code', function (tree) {
-    t.equal(tree.length, 595);
-    t.end();
-  });
+testDump('print_code', function (sections, t) {
+  t.equal(sections.length, 565, 'length is right');
+
+  var stats = sections.reduce(function (acc, section) {
+    Object.keys(section).forEach(function (key) {
+      acc[key] |= 0;
+      ++acc[key];
+    });
+    return acc;
+  }, {});
+
+  t.deepEqual(stats, {
+    code: 563,
+    optimizedCode: 2,
+    source: 221
+  }, 'section keys counts are correct');
+
+  t.ok(sections.every(function (section) {
+    return 'code' in section != 'optimizedCode' in section;
+  }), 'each section contains exactly one of "code" and "optimizedCode"');
+
+  t.end();
 });
 
 
-test('print_opt_code', function (t) {
-  onDump('--print-opt-code', function (tree) {
-    t.equal(tree.length, 2);
-    t.end();
+testDump('print_opt_code', function (sections, t) {
+  t.equal(sections.length, 2, 'length is right');
+
+  var keys = sections.map(function (section) {
+    return Object.keys(section).sort();
   });
+  t.deepEqual(keys, [['optimizedCode', 'source'], ['optimizedCode', 'source']],
+              'sections keys are correct');
+
+  t.end();
 });

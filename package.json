@@ -5,7 +5,7 @@
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "tape test/test.js"
+    "test": "tape test/*.js"
   },
   "homepage": "https://github.com/eush77/v8-code-dump-parser",
   "repository": {
@@ -25,9 +25,12 @@
     "unoptimized",
     "parser"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "camel-case": "^1.1.2",
+    "fzip": "^0.2.0",
+    "regexp.execall": "^0.1.1"
+  },
   "devDependencies": {
-    "parse-concat-stream": "^0.2.0",
     "tape": "^4.0.0"
   }
 }
