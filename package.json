@@ -1,5 +1,5 @@
 {
-  "name": "v8-print-code-parser",
+  "name": "v8-code-dump-parser",
   "version": "0.0.0",
   "description": "Parse v8 --print-code and --print-opt-code output",
   "author": "Eugene Sharygin <eush77@gmail.com>",
@@ -7,13 +7,13 @@
   "scripts": {
     "test": "tape test/test.js"
   },
-  "homepage": "https://github.com/eush77/v8-print-code-parser",
+  "homepage": "https://github.com/eush77/v8-code-dump-parser",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eush77/v8-print-code-parser"
+    "url": "https://github.com/eush77/v8-code-dump-parser"
   },
   "bugs": {
-    "url": "https://github.com/eush77/v8-print-code-parser/issues"
+    "url": "https://github.com/eush77/v8-code-dump-parser/issues"
   },
   "keywords": [
     "v8",
@@ -21,6 +21,8 @@
     "asm",
     "optimization",
     "code",
+    "optimized",
+    "unoptimized",
     "parser"
   ],
   "dependencies": {},
