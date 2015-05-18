@@ -7,6 +7,9 @@
   "scripts": {
     "test": "tape test/*.js"
   },
+  "files": [
+    "index.js"
+  ],
   "homepage": "https://github.com/eush77/v8-code-dump-parser",
   "repository": {
     "type": "git",
