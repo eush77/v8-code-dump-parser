@@ -1,6 +1,7 @@
 'use strict';
 
-var parseCodeSection = require('./src/parse-code-section');
+var parseCodeSection = require('./src/parse-code-section'),
+    stringifyCodeSection = require('./src/stringify-code-section');
 
 var execall = require('regexp.execall'),
     fzip = require('fzip'),
@@ -28,7 +29,7 @@ var makeSection = function (name, value) {
 };
 
 
-module.exports = function (dump) {
+var parse = function (dump) {
   var positions = execall(/^--- (.*) ---$/gm, dump);
 
   return fzip(positions.slice(0, -1), positions.slice(1), function (left, right) {
@@ -49,3 +50,30 @@ module.exports = function (dump) {
     })
     .filter(Boolean);
 };
+
+
+var stringify = {
+  sections: function (sections) {
+    return sections.map(stringify.section).join('');
+  },
+  section: function (section) {
+    var parts = [];
+    if (section.source) {
+      parts.push(stringify.caption('Raw source'),
+                 section.source, '\n\n');
+    }
+    var code = section.code || section.optimizedCode;
+    parts.push(stringify.caption(section.optimizedCode ? 'Optimized code' : 'Code'),
+               stringify.code(code), '\n\n', stringify.caption('End code'));
+    return parts.join('');
+  },
+  caption: function (caption) {
+    return '--- ' + caption + ' ---\n';
+  },
+  code: stringifyCodeSection
+};
+
+
+parse.stringify = stringify.sections;
+parse.parse = parse;
+module.exports = parse;
