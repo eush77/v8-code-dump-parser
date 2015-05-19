@@ -1,6 +1,6 @@
 {
   "name": "v8-code-dump-parser",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Parse v8 --print-code or --print-opt-code output and stringify it back",
   "author": "Eugene Sharygin <eush77@gmail.com>",
   "license": "MIT",
