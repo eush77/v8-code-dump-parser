@@ -8,7 +8,8 @@
     "test": "tape test/*.js"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "src/"
   ],
   "homepage": "https://github.com/eush77/v8-code-dump-parser",
   "repository": {
@@ -31,7 +32,8 @@
   "dependencies": {
     "camel-case": "^1.1.2",
     "fzip": "^0.2.0",
-    "regexp.execall": "^0.1.1"
+    "regexp.execall": "^0.1.1",
+    "zipmap": "^1.1.1"
   },
   "devDependencies": {
     "tape": "^4.0.0"

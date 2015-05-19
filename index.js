@@ -1,19 +1,31 @@
 'use strict';
 
+var parseCodeSection = require('./src/parse-code-section');
+
 var execall = require('regexp.execall'),
     fzip = require('fzip'),
     camelCase = require('camel-case');
 
 
-var sectionName = (function () {
-  var nameMap = {
-    rawSource: 'source'
-  };
+var makeSection = function (name, value) {
+  name = camelCase(name);
+  value = value.trim();
 
-  return function (name) {
-    return nameMap[name = camelCase(name)] || name;
-  };
-}());
+  switch (name) {
+    case 'rawSource':
+      name = 'source';
+      break;
+
+    case 'code':
+    case 'optimizedCode':
+      value = parseCodeSection(value);
+      break;
+  }
+
+  var section = {};
+  section[name] = value;
+  return section;
+};
 
 
 module.exports = function (dump) {
@@ -25,10 +37,8 @@ module.exports = function (dump) {
       return null;
     }
 
-    var section = {};
-    section[sectionName(name)] =
-      dump.slice(left.index + left[0].length + 1, right.index - 1);
-    return section;
+    return makeSection(name, dump.slice(left.index + left[0].length + 1,
+                                        right.index - 1));
   })
     .map(function (section, index, sections) {
       if (section && Object.keys(section) == 'source') {
