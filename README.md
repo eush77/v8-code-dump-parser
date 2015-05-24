@@ -73,7 +73,7 @@ into this:
       kind: "OPTIMIZED_FUNCTION",
       name: "sub",
       stack_slots: "1",
-      instructions: "Instructions (size = 111)\n0x1649c54c3e80     0  55             push rbp\n// ... more code ...\n0x1649c54c3edb    91  90             nop
+      instructions: "Instructions (size = 111)\n0x1649c54c3e80     0  55             push rbp\n// ... more code ...\n0x1649c54c3edb    91  90             nop",
       safepoints: "Safepoints (size = 19)\n0x1649c54c3ea3    35  1 (sp -> fp)       0",
       relocInfo: "RelocInfo (size = 14)\n0x1649c54c3e9f  code target (BUILTIN)  (0x1649c5425f80)\n0x1649c54c3ea7  position  (164)\n0x1649c54c3ecd  runtime entry  (deoptimization bailout 1)\n0x1649c54c3ed2  runtime entry  (deoptimization bailout 2)\n0x1649c54c3ed7  runtime entry  (deoptimization bailout 3)"
     },
